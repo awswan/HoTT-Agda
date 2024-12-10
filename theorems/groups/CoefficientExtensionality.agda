@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search #-}
 
 open import HoTT
 
@@ -429,4 +429,4 @@ module _ where
 
   Fin→-has-finite-support : ∀ {I} (f : Fin I → ℤ) → has-finite-support Fin-has-dec-eq f
   Fin→-has-finite-support {I} f = FormalSum-sum f , lemma
-    where abstract lemma = λ <I → ! (ap (λ fs → FormalSum-coef Fin-has-dec-eq fs <I) (FormalSum-sum'-β 0 I f) ∙ Word-coef-sum' 0 f <I)
+    where lemma = λ <I → ! (ap (λ fs → FormalSum-coef Fin-has-dec-eq fs <I) (FormalSum-sum'-β 0 I f) ∙ Word-coef-sum' 0 f <I)

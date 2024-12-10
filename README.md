@@ -8,10 +8,12 @@ foundations in Agda.  The structure of the source code is described below.
 Setup
 -----
 
-The code is loosely broken into `hott-core` and `hott-theorems` Agda libraries.
-This is a fork of the library that is compatible with Agda 2.6.1.
+Agda 2.7.0.1-compatible fork of HoTT-Agda.
+
 To use, you need a recent version of Agda and to include at least the path to `hott-core.agda-lib` in your Agda library list.
-If you download using git remember to check out this branch e.g. using `git clone -b agda-2.6.1-compatible git@github.com:awswan/HoTT-Agda.git`.
+If you download using git remember to check out this branch e.g. using `git clone -b 2.7.0.1-compatible git@github.com:awswan/HoTT-Agda.git`.
+
+The code is loosely broken into `hott-core` and `hott-theorems` Agda libraries.
 The content of `hott-theorems` is not working in this version of the library.
 
 Agda Options

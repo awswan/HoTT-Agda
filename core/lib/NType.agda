@@ -31,6 +31,7 @@ module _ {i} where
   instance
     has-level-apply-instance : {A : Type i} {n : ℕ₋₂} {x y : A} {{p : has-level (S n) A}} → has-level n (x == y)
     has-level-apply-instance {x = x} {y} {{p}} = has-level-apply p x y
+  -- {-# OVERLAPPABLE has-level-apply-instance #-}
 
   is-contr = has-level -2
   is-prop = has-level -1

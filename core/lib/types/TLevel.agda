@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search #-}
 
 open import lib.Base
 open import lib.PathGroupoid

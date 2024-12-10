@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search --instance-search-depth=2 #-}
 
 open import HoTT
 

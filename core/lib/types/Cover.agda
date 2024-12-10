@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search #-}
 
 open import lib.Basics renaming (pt to pt⊙)
 open import lib.NConnected

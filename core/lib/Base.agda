@@ -545,6 +545,7 @@ instance
   ℕ-reader : FromNat ℕ
   FromNat.in-range ℕ-reader _ = ⊤
   FromNat.read ℕ-reader n = n
+  {-# OVERLAPPABLE ℕ-reader #-}
 
   TLevel-reader : FromNat TLevel
   FromNat.in-range TLevel-reader _ = ⊤

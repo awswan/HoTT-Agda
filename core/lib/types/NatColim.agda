@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search #-}
 
 open import lib.Basics
 open import lib.NConnected
@@ -32,6 +32,21 @@ module _ {i} {D : ℕ → Ptd i} where
   ⊙ℕColim : (d : (n : ℕ) → (D n ⊙→ D (S n))) → Ptd i
   ⊙ℕColim d = ⊙[ ℕColim (fst ∘ d) , ncin 0 (pt (D 0)) ]
 
+-- Define this initial part of ℕColimElim first, to make the REWRITE declaration
+-- go through (in Agda 2.7.0.1) ~Josh
+module ℕColimElim-in {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n))
+  {j} {P : ℕColim d → Type j}
+  (ncin* : (n : ℕ) (x : D n) → P (ncin n x))
+  (ncglue* : (n : ℕ) (x : D n)
+    → ncin* n x == ncin* (S n) (d n x) [ P ↓ ncglue n x ])
+  where
+
+  postulate  -- HIT
+    f : Π (ℕColim d) P
+    ncin-β : ∀ n x → f (ncin n x) ↦ ncin* n x
+
+{-# REWRITE ℕColimElim-in.ncin-β #-}
+
 module _ {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n)) where
 
   module ℕColimElim {j} {P : ℕColim d → Type j}
@@ -39,11 +54,7 @@ module _ {i} {D : ℕ → Type i} (d : (n : ℕ) → D n → D (S n)) where
     (ncglue* : (n : ℕ) (x : D n)
       → ncin* n x == ncin* (S n) (d n x) [ P ↓ ncglue n x ])
     where
-
-    postulate  -- HIT
-      f : Π (ℕColim d) P
-      ncin-β : ∀ n x → f (ncin n x) ↦ ncin* n x
-    {-# REWRITE ncin-β #-}
+    open ℕColimElim-in d ncin* ncglue* public
 
     postulate  -- HIT
       ncglue-β : (n : ℕ) (x : D n) → apd f (ncglue n x) == ncglue* n x

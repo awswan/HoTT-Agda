@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K --rewriting --overlapping-instances #-}
+{-# OPTIONS --without-K --rewriting --backtracking-instance-search --instance-search-depth=10 #-}
 
 open import HoTT
 
@@ -47,8 +47,8 @@ module groups.ReducedWord {i} {A : Type i} (dec : has-dec-eq A) where
   is-reduced-is-prop {nil}                 = ⟨⟩
   is-reduced-is-prop {x    :: nil}         = ⟨⟩
   is-reduced-is-prop {inl x :: inl y :: l} = is-reduced-is-prop {inl y :: l}
-  is-reduced-is-prop {inl x :: inr y :: l} = ⟨⟩ where instance _ = is-reduced-is-prop {inr y :: l}
-  is-reduced-is-prop {inr x :: inl y :: l} = ⟨⟩ where instance _ = is-reduced-is-prop {inl y :: l}
+  is-reduced-is-prop {inl x :: inr y :: l} = let instance _ = is-reduced-is-prop {inr y :: l} in ⟨⟩
+  is-reduced-is-prop {inr x :: inl y :: l} = let instance _ = is-reduced-is-prop {inl y :: l} in ⟨⟩
   is-reduced-is-prop {inr x :: inr y :: l} = is-reduced-is-prop {inr y :: l}
 
   is-reduced-prop : SubtypeProp (Word A) i

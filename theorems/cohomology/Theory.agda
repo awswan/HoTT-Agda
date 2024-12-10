@@ -110,7 +110,7 @@ record CohomologyTheory i : Type (lsucc i) where
 
   CEl-emap : (n : ℤ) {X Y : Ptd i} → X ⊙≃ Y → Group.El (C n Y) ≃ Group.El (C n X)
   CEl-emap n ⊙eq = equiv (CEl-fmap n (⊙–> ⊙eq)) (CEl-fmap n (⊙<– ⊙eq)) to-from from-to where
-    abstract
+    -- abstract
       to-from = λ x → ! (CEl-fmap-∘ n (⊙<– ⊙eq) (⊙–> ⊙eq) x)
                     ∙ ap (λ f → CEl-fmap n f x) (⊙λ= (⊙<–-inv-l ⊙eq))
                     ∙ CEl-fmap-idf n x
@@ -124,7 +124,7 @@ record CohomologyTheory i : Type (lsucc i) where
 
   C-emap : (n : ℤ) {X Y : Ptd i} → X ⊙≃ Y → C n Y ≃ᴳ C n X
   C-emap n ⊙eq = ≃-to-≃ᴳ (CEl-emap n ⊙eq) lemma
-    where abstract lemma = GroupHom.pres-comp (C-fmap n (⊙–> ⊙eq))
+    where lemma = GroupHom.pres-comp (C-fmap n (⊙–> ⊙eq))
 
   C-isemap = CEl-isemap
 
@@ -192,6 +192,7 @@ record CohomologyTheory i : Type (lsucc i) where
         =⟨ GroupHom.pres-ident (C-fmap n (⊙cst {X = X} {Y = ⊙LU})) ⟩
       Cident n X ∎
       where
+      ⊙LU : Ptd i
       ⊙LU = ⊙Lift {j = i} ⊙Unit
 
     C-fmap-const : (n : ℤ) {X Y : Ptd i} {f : X ⊙→ Y}

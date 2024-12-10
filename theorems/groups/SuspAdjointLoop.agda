@@ -16,7 +16,6 @@ module groups.SuspAdjointLoop {i} where
         (GroupStructure.comp (⊙→Ω-group-structure (⊙Susp X) Y))
         (GroupStructure.comp (⊙→Ω-group-structure X (⊙Ω Y)))
         (–> (A.eq X (⊙Ω Y)))
-    abstract
       pres-comp h₁ h₂ =
         B.nat-cod h₁ h₂ ⊙Ω-∙
         ∙ ap (_⊙∘ ⊙fanout (–> (A.eq X (⊙Ω Y)) h₁) (–> (A.eq X (⊙Ω Y)) h₂))
@@ -57,8 +56,8 @@ module groups.SuspAdjointLoop {i} where
     Trunc-⊙→Ω-iso-Trunc-⊙→Ω-nat-dom : {X Y : Ptd i} (f : X ⊙→ Y) (Z : Ptd i)
       → fst (Trunc-⊙→Ω-iso-Trunc-⊙→Ω X Z) ∘ᴳ Trunc-⊙→Ω-group-fmap-dom (⊙Susp-fmap f) Z
         == Trunc-⊙→Ω-group-fmap-dom f (⊙Ω Z) ∘ᴳ fst (Trunc-⊙→Ω-iso-Trunc-⊙→Ω Y Z)
-    Trunc-⊙→Ω-iso-Trunc-⊙→Ω-nat-dom f Z = group-hom= $ λ= $ Trunc-elim
-      (λ g → ap [_] (! (A.nat-dom f (⊙Ω Z) g)))
+    Trunc-⊙→Ω-iso-Trunc-⊙→Ω-nat-dom {X} f Z =
+      group-hom= $ λ= $ Trunc-elim (λ g → ap [_] (! (A.nat-dom f (⊙Ω Z) g)))
 
   module _ (X Y : Ptd i) where
 
